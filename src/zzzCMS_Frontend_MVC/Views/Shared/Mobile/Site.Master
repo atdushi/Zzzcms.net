@@ -1,0 +1,28 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<%@ Register Src="UserControls/LogOnUserControl.ascx" TagName="LogOnUserControl"
+    TagPrefix="uc1" %>
+<%@ Register Src="UserControls/Banners.ascx" TagName="Banners" TagPrefix="uc2" %>
+<%@ Register Src="UserControls/MainMenu.ascx" TagName="MainMenu" TagPrefix="uc3" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="../../../Content/sunny/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css" />
+    <link href="../../../Content/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+    <link href="../../../Content/Site.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <uc1:LogOnUserControl ID="LogOnUserControl1" runat="server" />
+        <uc3:MainMenu ID="MainMenu1" runat="server" />
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+        <uc2:Banners ID="Banners1" runat="server" />
+    </div>
+    </form>
+</body>
+</html>

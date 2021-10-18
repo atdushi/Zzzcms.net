@@ -1,0 +1,67 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="CMS.master.cs" Inherits="CMS.CMS" %>
+
+<%@ Register Src="UserControls/Thermometer.ascx" TagName="Thermometer" TagPrefix="uc1" %>
+<html>
+<head runat="server">
+    <title>ZZZ CMS</title>
+    <link href="/Images/cms.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css"
+        type="text/css" />
+
+    <script type="text/javascript" src="<%= this.ResolveClientUrl("~/Scripts/jquery-1.4.1.min.js") %>"></script>
+    <script type="text/javascript" src="<%= this.ResolveClientUrl("~/Scripts/jquery-ui.min.js") %>"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("a, input:submit").button();
+        });
+    </script>
+
+    <script language="javascript" type="text/javascript" src="/Scripts/tiny_mce/tiny_mce.js"></script>
+    <script language="javascript" type="text/javascript">
+    tinyMCE.init({
+        mode: "textareas",
+        theme: "advanced",
+        theme_advanced_toolbar_location : "top",
+        theme_advanced_toolbar_align : "left",
+        theme_advanced_statusbar_location : "bottom",
+        theme_advanced_resizing : true
+    });
+    </script>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptLocalization="true"
+            EnableScriptGlobalization="true" />
+        <table height="100%" width="60%" align="center" class="mainTableStyle">
+            <tr style="height: 30px">
+                <td align="right" valign="top" class="topMenuStyle">
+                    <asp:LoginName ID="LoginName1" runat="server" ForeColor="White" />
+                    <asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="White" />
+                </td>
+            </tr>
+            <tr>
+                <td align="center" valign="top">
+                    <br />
+                    <uc1:Thermometer ID="Thermometer1" runat="server" />
+                </td>
+            </tr>
+            <tr valign="top">
+                <td align="center">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <div id="performance">
+                        <% =PageRenderTime %>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </form>
+</body>
+</html>

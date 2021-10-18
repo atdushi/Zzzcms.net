@@ -1,0 +1,40 @@
+A:hover
+{
+    text-decoration: underline;
+}
+
+A
+{
+    color: #656585;
+    text-decoration: none;
+}
+
+A:visited
+{
+    color: #656585;
+    text-decoration: none;
+}
+
+.mainTitleColor
+{
+    color: #284775;
+}
+
+.topMenuStyle
+{
+    background-color: #4F6785;
+}
+
+.mainTableStyle
+{
+    border-collapse: collapse;
+    border: .10em solid #656585;
+}
+
+#performance
+{
+	color: #888;
+
+	text-indent:15px;
+	font-size:9pt;
+}

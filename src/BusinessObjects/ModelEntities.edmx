@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BusinessObjects.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="BusinessObjectsStoreContainer">
+          <EntitySet Name="Banners" EntityType="BusinessObjects.Store.Banners" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="MenuAndPages" EntityType="BusinessObjects.Store.MenuAndPages" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="News" EntityType="BusinessObjects.Store.News" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="NewsCategories" EntityType="BusinessObjects.Store.NewsCategories" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <AssociationSet Name="FK_MenuAndPages_ParentId_MenuAndPages_Id" Association="BusinessObjects.Store.FK_MenuAndPages_ParentId_MenuAndPages_Id">
+            <End Role="MenuAndPages" EntitySet="MenuAndPages" />
+            <End Role="MenuAndPages1" EntitySet="MenuAndPages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_0" Association="BusinessObjects.Store.FK_News_0">
+            <End Role="NewsCategories" EntitySet="NewsCategories" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Banners">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Link" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="IsOuter" Type="bit" />
+          <Property Name="Picture" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="SortOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="MenuAndPages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="ShowInTopMenu" Type="bit" Nullable="false" />
+          <Property Name="MenuSortOrder" Type="int" />
+          <Property Name="Text" Type="ntext" />
+          <Property Name="Handler" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="Text" Type="ntext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="250" />
+        </EntityType>
+        <Association Name="FK_MenuAndPages_ParentId_MenuAndPages_Id">
+          <End Role="MenuAndPages" Type="BusinessObjects.Store.MenuAndPages" Multiplicity="0..1" />
+          <End Role="MenuAndPages1" Type="BusinessObjects.Store.MenuAndPages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuAndPages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuAndPages1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_0">
+          <End Role="NewsCategories" Type="BusinessObjects.Store.NewsCategories" Multiplicity="1" />
+          <End Role="News" Type="BusinessObjects.Store.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BusinessObjects" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="ModelEntities">
+          <EntitySet Name="Banners" EntityType="BusinessObjects.Banner" />
+          <EntitySet Name="MenuAndPages" EntityType="BusinessObjects.MenuAndPage" />
+          <EntitySet Name="News" EntityType="BusinessObjects.News" />
+          <EntitySet Name="NewsCategories" EntityType="BusinessObjects.NewsCategory" />
+          <AssociationSet Name="FK_MenuAndPages_ParentId_MenuAndPages_Id" Association="BusinessObjects.FK_MenuAndPages_ParentId_MenuAndPages_Id">
+            <End Role="MenuAndPages" EntitySet="MenuAndPages" />
+            <End Role="MenuAndPages1" EntitySet="MenuAndPages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_0" Association="BusinessObjects.FK_News_0">
+            <End Role="NewsCategories" EntitySet="NewsCategories" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Banner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Link" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="IsOuter" Type="Boolean" />
+          <Property Name="Picture" Type="String" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MenuAndPage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="ShowInTopMenu" Type="Boolean" Nullable="false" />
+          <Property Name="MenuSortOrder" Type="Int32" />
+          <Property Name="Text" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Handler" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="SubPages" Relationship="BusinessObjects.FK_MenuAndPages_ParentId_MenuAndPages_Id" FromRole="MenuAndPages" ToRole="MenuAndPages1" />
+          <NavigationProperty Name="ParentPage" Relationship="BusinessObjects.FK_MenuAndPages_ParentId_MenuAndPages_Id" FromRole="MenuAndPages1" ToRole="MenuAndPages" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="NewsCategory" Relationship="BusinessObjects.FK_News_0" FromRole="News" ToRole="NewsCategories" />
+        </EntityType>
+        <EntityType Name="NewsCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="News" Relationship="BusinessObjects.FK_News_0" FromRole="NewsCategories" ToRole="News" />
+        </EntityType>
+        <Association Name="FK_MenuAndPages_ParentId_MenuAndPages_Id">
+          <End Role="MenuAndPages" Type="BusinessObjects.MenuAndPage" Multiplicity="0..1" />
+          <End Role="MenuAndPages1" Type="BusinessObjects.MenuAndPage" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_News_0">
+          <End Role="NewsCategories" Type="BusinessObjects.NewsCategory" Multiplicity="1" />
+          <End Role="News" Type="BusinessObjects.News" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BusinessObjectsStoreContainer" CdmEntityContainer="ModelEntities">
+          <EntitySetMapping Name="Banners">
+            <EntityTypeMapping TypeName="IsTypeOf(BusinessObjects.Banner)">
+              <MappingFragment StoreEntitySet="Banners">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="IsOuter" ColumnName="IsOuter" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuAndPages">
+            <EntityTypeMapping TypeName="IsTypeOf(BusinessObjects.MenuAndPage)">
+              <MappingFragment StoreEntitySet="MenuAndPages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ShowInTopMenu" ColumnName="ShowInTopMenu" />
+                <ScalarProperty Name="MenuSortOrder" ColumnName="MenuSortOrder" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Handler" ColumnName="Handler" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="IsTypeOf(BusinessObjects.News)">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsCategories">
+            <EntityTypeMapping TypeName="IsTypeOf(BusinessObjects.NewsCategory)">
+              <MappingFragment StoreEntitySet="NewsCategories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_MenuAndPages_ParentId_MenuAndPages_Id" TypeName="BusinessObjects.FK_MenuAndPages_ParentId_MenuAndPages_Id" StoreEntitySet="MenuAndPages">
+            <EndProperty Name="MenuAndPages">
+              <ScalarProperty Name="Id" ColumnName="ParentId" />
+            </EndProperty>
+            <EndProperty Name="MenuAndPages1">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition ColumnName="ParentId" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_News_0" TypeName="BusinessObjects.FK_News_0" StoreEntitySet="News">
+            <EndProperty Name="NewsCategories">
+              <ScalarProperty Name="Id" ColumnName="CategoryId" />
+            </EndProperty>
+            <EndProperty Name="News">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer>
+    <edmx:Connection>
+      <DesignerInfoPropertySet xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="ModelEntities" xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+        <EntityTypeShape EntityType="BusinessObjects.Banner" Width="1.5" PointX="2.75" PointY="3.75" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessObjects.MenuAndPage" Width="1.5" PointX="0.75" PointY="0.75" Height="2.5571907552083335" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessObjects.News" Width="1.5" PointX="5" PointY="0.875" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessObjects.NewsCategory" Width="1.5" PointX="2.75" PointY="1.125" Height="1.5956835937500002" IsExpanded="true" />
+        <AssociationConnector Association="BusinessObjects.FK_MenuAndPages_ParentId_MenuAndPages_Id" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.2819230769230767" PointY="3.3071907552083335" />
+          <ConnectorPoint PointX="1.2819230769230767" PointY="3.5571907552083335" />
+          <ConnectorPoint PointX="1.7284615384615383" PointY="3.5571907552083335" />
+          <ConnectorPoint PointX="1.7284615384615383" PointY="3.3071907552083335" /></AssociationConnector>
+        <AssociationConnector Association="BusinessObjects.FK_News_0" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.25" PointY="1.9228417968750002" />
+          <ConnectorPoint PointX="5" PointY="1.9228417968750002" /></AssociationConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

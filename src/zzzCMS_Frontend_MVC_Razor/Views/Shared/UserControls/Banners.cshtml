@@ -1,0 +1,19 @@
+﻿@using BusinessObjects;
+@using System.Data;
+@using System.Configuration;
+<div class="rightheading">
+    <h4>
+        Banners</h4>
+</div>
+<div id="galleryblank">
+    @for (int i = 0; i < ((DataTable)ViewData["Banners"]).Rows.Count; i++)
+    {
+        string bannerHref = ((DataTable)ViewData["Banners"]).Rows[i]["Link"].ToString();
+        string imgSrc = ConfigurationManager.AppSettings["UploadPath"] + "/" + ((DataTable)ViewData["Banners"]).Rows[i]["Picture"].ToString();
+        string bannerAlt = ((DataTable)ViewData["Banners"]).Rows[i]["Title"].ToString();
+
+        <a href=@bannerHref>
+            <img src=@imgSrc  alt=@bannerAlt  height="100" width="155" style="border: none" />
+        </a>
+    }
+</div>

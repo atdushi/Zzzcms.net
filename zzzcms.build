@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<project name="zzzcms" default="distrib" xmlns="http://nant.sf.net/schemas/nant.xsd">
+	<property name="build.dir" value="build" />
+	<property name="nant.settings.currentframework" value="net-4.0" />
+
+	<!-- User targets -->
+	<target name="distrib" depends="clean, compile, backend, frontend.aspx, frontend.razor"/>
+	
+	<target name="backend">
+		<copy todir="${build.dir}\zzzCMS_Backend">
+			<fileset basedir="src\zzzCMS_Backend\bin">
+				<include name="**\*"/>
+				<exclude name="**\*.pdb" />
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="frontend.aspx">
+		<copy todir="${build.dir}\zzzCMS_Frontend_MVC">
+			<fileset basedir="src\zzzCMS_Frontend_MVC">
+				<include name="**\*"/>
+				<exclude name="**\*.pdb" />
+				<exclude name="**\*.cs" />
+			</fileset>
+		</copy>
+	</target>
+	
+		<target name="frontend.razor">
+		<copy todir="${build.dir}\zzzCMS_Frontend_MVC_Razor">
+			<fileset basedir="src\zzzCMS_Frontend_MVC_Razor">
+				<include name="**\*"/>
+				<exclude name="**\*.pdb" />
+				<exclude name="**\*.cs" />
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="clean" description="Delete Automated Build artifacts">
+		<delete dir="${build.dir}" if="${directory::exists(build.dir)}"/>
+	</target>
+
+	<target name="compile" description="Compiles using the AutomatedDebug Configuration">
+		<msbuild project="src\zzzcms.sln">
+		</msbuild>
+	</target>
+</project>
+

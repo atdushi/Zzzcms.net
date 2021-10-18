@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        @ViewBag.Title
+    </title>
+    <link href="../../Content/sunny/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css" />
+    <link href="../../Content/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+    <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/Scripts/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="/Scripts/jqgrid-3.4.4/i18n/grid.locale-en.js"></script>
+    <script type="text/javascript" src="/Scripts/jqgrid-3.4.4/grid.base.js"></script>
+    <link rel="icon" href="../../Content/images/icon.ico" />
+</head>
+<body>
+    <div id="headerbg">
+        <div id="headerblank">
+            <div id="header">
+                @{Html.RenderPartial("UserControls/MainMenu");}
+                @{Html.RenderPartial("UserControls/LogOnUserControl");}
+            </div>
+        </div>
+    </div>
+    <div id="contentbg">
+        <div id="contentblank">
+            <div id="content">
+                <div id="contentleft">
+                    @{Html.RenderPartial("UserControls/Events");}
+                    @{Html.RenderPartial("UserControls/SubMenu");}
+                </div>
+                <div id="contentmid">
+                    @RenderBody()
+                </div>
+                <div id="contentright">
+                    @{Html.RenderPartial("UserControls/Banners");}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footerbg">
+        @{Html.RenderPartial("UserControls/Footer", ViewData["MainMenu"]);}
+    </div>
+</body>
+</html>

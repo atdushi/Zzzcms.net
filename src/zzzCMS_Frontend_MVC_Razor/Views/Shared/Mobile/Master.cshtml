@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="../../../Content/sunny/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css" />
+    <link href="../../../Content/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+    <link href="../../../Content/Site.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <td>
+                    @{Html.RenderPartial("UserControls/LogOnUserControl");}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @{Html.RenderPartial("UserControls/MainMenu");}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @RenderBody()
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @{Html.RenderPartial("UserControls/Banners");}
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
